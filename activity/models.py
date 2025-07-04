@@ -8,13 +8,13 @@ class Activity(models.Model):
     hps = models.IntegerField(default=100)
     description = models.TextField(null=True , blank=True)
     session = models.ForeignKey(Session , on_delete=models.CASCADE)
-    file = models.FileField(upload_to='activity/')
+    file = models.FileField(upload_to='activity/' , blank=True , null=True)
 
 class ActivitySubmission(models.Model):
     activity = models.ForeignKey(Activity , on_delete=models.CASCADE)
     student = models.ForeignKey(User , on_delete=models.CASCADE)
     answer = models.TextField()
-    file = models.FileField()
+    file = models.FileField(upload_to='submission/' , blank=True , null=True)
 
 class ActivityScore(models.Model):
     activity = models.ForeignKey(Activity , on_delete=models.CASCADE)

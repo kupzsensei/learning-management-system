@@ -17,6 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+from rest_framework_simplejwt.views import TokenVerifyView
+
+
+from section.views import SectionView
+from subject.views import SubjectView
+from .views import GetAllTeacherView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/auth/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('api/sections/' , SectionView.as_view()),
+    path('api/subjects/' , SubjectView.as_view()),
+    path('api/teachers/' , GetAllTeacherView.as_view()),
 ]
