@@ -1,16 +1,20 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Section
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from .serializers import SectionSerializer, SectionDetailedSerializer
-# Create your views here.
 
+
+# Create your views here.
 class SectionView(generics.ListCreateAPIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
 
 class SectionDetailedView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Section.objects.all()
     serializer_class = SectionSerializer
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     
     def get_serializer_class(self):
